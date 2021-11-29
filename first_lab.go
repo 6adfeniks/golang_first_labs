@@ -22,5 +22,8 @@ func main() {
 	fmt.Printf("The factorial of %d is %d\n", x, fac)
 
 	fmt.Println("Something else?..")
+	fmt.Println("efverveer")
+	fmt.Println("efverveer")
+	fmt.Println("efverveer")
 
 }

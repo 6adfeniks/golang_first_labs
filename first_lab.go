@@ -24,6 +24,5 @@ func main() {
 	fmt.Println("Something else?..")
 	fmt.Println("efverveer")
 	fmt.Println("efverveer")
-	fmt.Println("efverveer")
 
 }

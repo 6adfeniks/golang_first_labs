@@ -36,8 +36,53 @@ func (t *date) add_month(month_ch int) {
 	}
 }
 func (t1 *date) differences(t2 *date) {
-	fmt.Printf("The differnces between to dates in dyas is %f",
+	fmt.Printf("The differnces between to dates in dyas is %f\n",
 		math.Abs(float64((t1.day+t1.month*30+t1.year*365)-(t2.day+t2.month*30+t2.year*365))))
+}
+
+func check_month(monthh int) int {
+	var tmonth int
+	k := 0
+	for i := monthh; i < 1 || i > 12; {
+		fmt.Println("Wrong input, try again!")
+		fmt.Scanln(&tmonth)
+		i = tmonth
+		k++
+	}
+	if k > 0 {
+		return tmonth
+	}
+	return monthh
+}
+
+func check_day(dayy int) int {
+	var tday int
+	k := 0
+	for i := dayy; i < 1 || i > 30; {
+		fmt.Println("Wrong input, try again!")
+		fmt.Scanln(&tday)
+		i = tday
+		k++
+	}
+	if k > 0 {
+		return tday
+	}
+	return dayy
+}
+
+func check_year(yearr int) int {
+	var tyear int
+	k := 0
+	for i := yearr; i < 0; {
+		fmt.Println("Wrong input, try again!")
+		fmt.Scanln(&tyear)
+		i = tyear
+		k++
+	}
+	if k > 0 {
+		return tyear
+	}
+	return yearr
 }
 
 func start(dates []date) {
@@ -58,10 +103,15 @@ func start(dates []date) {
 			var y int
 			fmt.Print("Enter the day: ")
 			fmt.Scanln(&d)
+			d = check_day(d)
+
 			fmt.Print("Enter the month: ")
 			fmt.Scanln(&m)
+			m = check_month(m)
+
 			fmt.Print("Enter the year: ")
 			fmt.Scanln(&y)
+			y = check_year(y)
 
 			dates = append(
 				dates, date{d, m, y},
@@ -71,9 +121,26 @@ func start(dates []date) {
 				fmt.Printf("%d date - %d/%d/%d\n", i+1, v.day, v.month, v.year)
 			}
 		case 3:
-			fmt.Println("later")
+			fmt.Println("Choose the date u want to change:")
+			for i, v := range dates {
+				fmt.Printf("%d date - %d/%d/%d\n", i+1, v.day, v.month, v.year)
+			}
+			var ch int
+			fmt.Scanln(&ch)
+
+			var dayA int
+			var monthA int
+			fmt.Println("Enter the count of days and months u want to add: ")
+			fmt.Scanln(&dayA, &monthA)
+			dates[ch-1].add_day(dayA)
+			dates[ch-1].add_month(monthA)
+
 		case 4:
-			fmt.Println("later")
+			fmt.Println("Choose two dates(ex. 1 3) u want to find sub between them:")
+			var x int
+			var y int
+			fmt.Scanln(&x, &y)
+			dates[x-1].differences(&dates[y-1])
 		case 5:
 			return
 		default:
@@ -84,21 +151,6 @@ func start(dates []date) {
 }
 
 func main() {
-	/*var day1 *date = &date{22,5,2003}
-	fmt.Print("Enter the month: ")
-	var x int
-	fmt.Scanln(&x)
-	day1.month = x
-	fmt.Printf("%d/%d/%d - your date\n", day1.day, day1.month, day1.year)
-	day1.add_day(365)
-	fmt.Printf("%d/%d/%d - your date\n", day1.day, day1.month, day1.year)
-	day1.add_month(5)
-	fmt.Printf("%d/%d/%d - your date\n", day1.day, day1.month, day1.year)
-	var day2 *date = &date{12, 3, 2015}
-	fmt.Printf("%d/%d/%d - your 2nd date\n", day2.day, day2.month, day2.year)
-	day1.differences(day2)*/
-
 	dates := []date{}
 	start(dates)
-
 }

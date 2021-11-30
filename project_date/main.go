@@ -5,7 +5,12 @@
 
 package main
 
+import "fmt"
+
 func main() {
+	var ss int
 	dates := []date{}
 	start(dates)
+	fmt.Scanln(&ss)
+
 }
